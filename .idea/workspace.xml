@@ -20,20 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f77fd8ea-5423-4c95-a452-092e4cbe6533" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-calculation-serv/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-customer-serv/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-dao/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-impl/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coupon-template-serv/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/main/java/com/dobby/coupon/template/api/enums/CouponType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/beans/CouponInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/beans/CouponTemplateInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/beans/PagedCouponTemplateInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/beans/rules/Discount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/beans/rules/TemplateRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/src/test/java/com/dobby/coupon/template/api/enums/CouponTypeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/coupon-template-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/coupon-template-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/coupon-template-serv/coupon-template-api/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="2Py0WOz0QFu1FnF7gBNmqWO0LBm" />
   <component name="ProjectViewState">
@@ -44,13 +60,50 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/coupon-template-serv/coupon-template-api" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.30149597" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.dobby.coupon.template.api.enums" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/coupon-template-serv/coupon-template-api" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CouponTypeTest.convert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="coupon-template-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dobby.coupon.template.api.enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dobby.coupon.template.api.enums" />
+      <option name="MAIN_CLASS_NAME" value="com.dobby.coupon.template.api.enums.CouponTypeTest" />
+      <option name="METHOD_NAME" value="convert" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CouponTypeTest.convert" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -62,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684414044192</updated>
-      <workItem from="1684414045519" duration="1945000" />
+      <workItem from="1684414045519" duration="4297000" />
     </task>
     <servers />
   </component>
@@ -85,13 +138,37 @@
       <screen x="-1871" y="-229" width="1871" height="1057" />
     </state>
     <state x="-1278" y="-45" key="#Project_Structure/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684415764155" />
+    <state width="1827" height="290" key="GridCell.Tab.0.bottom" timestamp="1684416746222">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state width="1827" height="290" key="GridCell.Tab.0.bottom/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416746222" />
+    <state width="1827" height="290" key="GridCell.Tab.0.center" timestamp="1684416746221">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state width="1827" height="290" key="GridCell.Tab.0.center/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416746221" />
+    <state width="1827" height="290" key="GridCell.Tab.0.left" timestamp="1684416746220">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state width="1827" height="290" key="GridCell.Tab.0.left/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416746220" />
+    <state width="1827" height="290" key="GridCell.Tab.0.right" timestamp="1684416746221">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state width="1827" height="290" key="GridCell.Tab.0.right/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416746221" />
+    <state x="-924" y="3" key="Maven.ArtifactSearchDialog" timestamp="1684416559794">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state x="-924" y="3" key="Maven.ArtifactSearchDialog/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416559794" />
+    <state x="-810" y="5" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1684416543598">
+      <screen x="-1871" y="-229" width="1871" height="1057" />
+    </state>
+    <state x="-810" y="5" key="com.intellij.testIntegration.createTest.CreateTestDialog/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684416543598" />
     <state x="-1264" y="0" key="new project wizard" timestamp="1684415587225">
       <screen x="-1871" y="-229" width="1871" height="1057" />
     </state>
     <state x="-1264" y="0" key="new project wizard/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684415587225" />
-    <state x="-884" y="152" key="search.everywhere.popup" timestamp="1684414560249">
+    <state x="-884" y="152" key="search.everywhere.popup" timestamp="1684417373321">
       <screen x="-1871" y="-229" width="1871" height="1057" />
     </state>
-    <state x="-884" y="152" key="search.everywhere.popup/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684414560249" />
+    <state x="-884" y="152" key="search.everywhere.popup/-1871.-229.1871.1057/0.23.1440.877@-1871.-229.1871.1057" timestamp="1684417373321" />
   </component>
 </project>
