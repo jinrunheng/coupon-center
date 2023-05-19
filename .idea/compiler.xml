@@ -12,6 +12,7 @@
         <module name="coupon-customer-serv" />
         <module name="coupon-calculation-serv" />
         <module name="coupon-template-api" />
+        <module name="db" />
         <module name="coupon-template-dao" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="coupon-template-dao" target="8" />
       <module name="coupon-template-impl" target="1.5" />
       <module name="coupon-template-serv" target="8" />
+      <module name="db" target="1.5" />
       <module name="middleware" target="8" />
     </bytecodeTargetLevel>
   </component>

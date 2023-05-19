@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/coupon-template-serv/coupon-template-dao/coupon-template-dao.iml" filepath="$PROJECT_DIR$/coupon-template-serv/coupon-template-dao/coupon-template-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-template-serv/coupon-template-impl/coupon-template-impl.iml" filepath="$PROJECT_DIR$/coupon-template-serv/coupon-template-impl/coupon-template-impl.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-template-serv/coupon-template-serv.iml" filepath="$PROJECT_DIR$/coupon-template-serv/coupon-template-serv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db/db.iml" filepath="$PROJECT_DIR$/db/db.iml" />
       <module fileurl="file://$PROJECT_DIR$/middleware/middleware.iml" filepath="$PROJECT_DIR$/middleware/middleware.iml" />
     </modules>
   </component>
