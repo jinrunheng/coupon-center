@@ -42,10 +42,16 @@ public class CouponTemplate implements Serializable {
     private Boolean available;
 
     /**
+     * 优惠券模版名称
+     */
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    /**
      * 使用门店；如果为空则为全门店满减券
      */
     @Column(name = "shop_id")
-    private String shopId;
+    private Long shopId;
 
     /**
      * 详细信息
