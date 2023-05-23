@@ -1,11 +1,15 @@
 package com.dobby.coupon.template.api.beans.rules;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * @Author Dooby Kim
  * @Date 2023/5/18 9:38 下午
  * @Version 1.0
  * @Desc 定义了使用优惠券的折扣规则
  */
+@Data
 public class Discount {
 
     /**
