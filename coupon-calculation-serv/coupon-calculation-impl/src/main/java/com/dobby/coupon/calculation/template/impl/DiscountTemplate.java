@@ -18,6 +18,6 @@ public class DiscountTemplate extends AbstractRuleTemplate implements RuleTempla
     protected Long calculateNewPrice(Long orderTotalAmount, Long shopTotalAmount, Long quota) {
         Long newPrice = convertToDecimal(shopTotalAmount * (quota.doubleValue() / 100));
         log.debug("original price={}, new price={}", orderTotalAmount, newPrice);
-        return newPrice;
+        return orderTotalAmount - shopTotalAmount + newPrice;
     }
 }
