@@ -62,10 +62,8 @@ Nacos 基本架构图如下：
 
 Nacos 内部支持两种一致性协议，一种是侧重一致性的 Raft 协议（CP），基于集群中选举出来的 Leader 节点进行数据写入（Nacos 1.x 版本采用的是 Raft 协议，2.x 后改为 JRaft 协议）；另一种是 Distro 协议（AP），它是一个侧重可用性（或最终一致性）的分布式一致性协议。
 
-对于服务注册与发现（Naming Service）， Nacos 采用的是 AP 协议，为了保障可用性，Nacos 尽最大可能保证 Naming Service 可以对外提供服务。Nacos 的服务注册与发现采取了心跳机制可自动完成服务数据补偿。如果数据丢失的话，可以通过该机制快速弥补数据丢失，并保障最终一致性。
-
-而对于配置管理（Config Service），Nacos 则采用了 CP 协议。配置数据，是直接在 Nacos 服务端进行创建并进行管理的，必须保证大部分的节点都保存了此配置数据才能认为配置被成功保存了。为了避免丢失配置变更引起严重故障，Nacos 使用了强⼀致性共识算法（Raft），保障集群中大部分的节点是强⼀致的。
-                        
+Nacos 可以根据配置识别为 CP 模式或 AP 模式，默认是 AP 模式。如果注册 Nacos 的 client 节点注册时 `ephemeral=true`(ephemeral 的含义是短暂的，临时的，即该节点为临时节点)，那么 Nacos 集群对这个 client  节点的效果就是AP，采用 distro 协议实现；而注册 Nacos 的 client 节点注册时 `ephemeral=false`，即表明该节点为非临时节点，那么 Nacos 集群对这个节点的效果就是 C P的，采用 raft 协议实现。根据 client 注册时的属性，AP，CP 同时混合存在，只是对不同的 client 节点效果不同。Nacos 可以很好的解决不同场景的业务需求。
+                
 ##### 1.1.5.1 Raft 协议
 
 关于理解 Raft 协议的原理，强烈推荐：🔗 http://thesecretlivesofdata.com/raft/
