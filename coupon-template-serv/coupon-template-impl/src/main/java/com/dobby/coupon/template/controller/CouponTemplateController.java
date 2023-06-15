@@ -32,7 +32,7 @@ public class CouponTemplateController {
      * @param request
      * @return
      */
-    @PostMapping("")
+    @PostMapping("/addTemplate")
     public CouponTemplateInfo addTemplate(@Valid @RequestBody CouponTemplateInfo request) {
         log.info("create coupon template : data = {}", request);
         return couponTemplateService.createTemplate(request);
@@ -48,6 +48,18 @@ public class CouponTemplateController {
     public CouponTemplateInfo cloneTemplate(@RequestParam("id") Long templateId) {
         log.info("clone coupon template: data={}", templateId);
         return couponTemplateService.cloneTemplate(templateId);
+    }
+
+    /**
+     * 读取优惠券
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/getTemplate")
+    public CouponTemplateInfo getTemplate(@RequestParam("id") Long id) {
+        log.info("load template, id : {}", id);
+        return couponTemplateService.loadTemplateInfo(id);
     }
 
     /**
