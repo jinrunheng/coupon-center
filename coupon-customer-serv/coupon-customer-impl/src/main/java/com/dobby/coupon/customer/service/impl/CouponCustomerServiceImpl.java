@@ -3,6 +3,7 @@ package com.dobby.coupon.customer.service.impl;
 import com.dobby.coupon.calculation.api.beans.ShoppingCart;
 import com.dobby.coupon.calculation.api.beans.SimulationOrder;
 import com.dobby.coupon.calculation.api.beans.SimulationResponse;
+import com.dobby.coupon.customer.constant.Constant;
 import com.dobby.coupon.customer.dao.CouponDao;
 import com.dobby.coupon.customer.dao.entity.Coupon;
 import com.dobby.coupon.customer.service.CouponConverter;
@@ -61,6 +62,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         final CouponTemplateInfo templateInfo = webClientBuilder.build()
                 .get()
                 .uri("http://coupon-template-serv/template/getTemplate?id=" + request.getCouponTemplateId())
+                .header(Constant.TRAFFIC_VERSION, request.getTrafficVersion())
                 .retrieve()
                 .bodyToMono(CouponTemplateInfo.class)
                 .block();
