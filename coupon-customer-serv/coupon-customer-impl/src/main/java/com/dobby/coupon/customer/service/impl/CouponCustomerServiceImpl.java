@@ -3,9 +3,10 @@ package com.dobby.coupon.customer.service.impl;
 import com.dobby.coupon.calculation.api.beans.ShoppingCart;
 import com.dobby.coupon.calculation.api.beans.SimulationOrder;
 import com.dobby.coupon.calculation.api.beans.SimulationResponse;
-import com.dobby.coupon.customer.constant.Constant;
 import com.dobby.coupon.customer.dao.CouponDao;
 import com.dobby.coupon.customer.dao.entity.Coupon;
+import com.dobby.coupon.customer.feign.CalculationService;
+import com.dobby.coupon.customer.feign.TemplateService;
 import com.dobby.coupon.customer.service.CouponConverter;
 import com.dobby.coupon.customer.service.CouponCustomerService;
 import com.dobby.coupon.template.api.beans.CouponInfo;
@@ -17,12 +18,12 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,15 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     @Autowired
     private CouponDao couponDao;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    // 将 webClient 调用，改造为 openFeign 调用
+//    @Autowired
+//    private WebClient.Builder webClientBuilder;
+
+    @Resource
+    private TemplateService templateService;
+
+    @Resource
+    private CalculationService calculationService;
 
 //    @Autowired
 //    private CouponTemplateService templateService;
@@ -59,13 +67,15 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     @Override
     public Coupon requestCoupon(RequestCoupon request) {
         // final CouponTemplateInfo templateInfo = templateService.loadTemplateInfo(request.getCouponTemplateId());
-        final CouponTemplateInfo templateInfo = webClientBuilder.build()
-                .get()
-                .uri("http://coupon-template-serv/template/getTemplate?id=" + request.getCouponTemplateId())
-                .header(Constant.TRAFFIC_VERSION, request.getTrafficVersion())
-                .retrieve()
-                .bodyToMono(CouponTemplateInfo.class)
-                .block();
+//        final CouponTemplateInfo templateInfo = webClientBuilder.build()
+//                .get()
+//                .uri("http://coupon-template-serv/template/getTemplate?id=" + request.getCouponTemplateId())
+//                .header(Constant.TRAFFIC_VERSION, request.getTrafficVersion())
+//                .retrieve()
+//                .bodyToMono(CouponTemplateInfo.class)
+//                .block();
+        // 20230619 改造为 openFeign 调用
+        final CouponTemplateInfo templateInfo = templateService.getTemplate(request.getCouponTemplateId());
 
         // 如果模版不存在则报错
         if (templateInfo == null) {
@@ -105,6 +115,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
      * @return
      */
     @Override
+    @Transactional
     public ShoppingCart placeOrder(ShoppingCart order) {
         if (CollectionUtils.isEmpty(order.getProducts())) {
             log.error("shopping cart is empty, order : {}", order);
@@ -128,7 +139,9 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
             final CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
             // final CouponTemplateInfo templateInfo = templateService.loadTemplateInfo(couponInfo.getTemplateId());
             // 改造 webflux 调用
-            final CouponTemplateInfo templateInfo = loadTemplateInfo(couponInfo.getTemplateId());
+//            final CouponTemplateInfo templateInfo = loadTemplateInfo(couponInfo.getTemplateId());
+            // 20230619 改造为 openFeign 调用
+            final CouponTemplateInfo templateInfo = templateService.getTemplate(couponInfo.getTemplateId());
             couponInfo.setTemplate(templateInfo);
             order.setCouponInfos(Lists.newArrayList(couponInfo));
         }
@@ -136,12 +149,14 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         // order 结算
         // final ShoppingCart checkout = calculationService.calculateOrderPrice(order);
         // 改造 webflux 调用
-        final ShoppingCart checkout = webClientBuilder.build().post()
-                .uri("http://coupon-calculation-serv/calculator/checkout")
-                .bodyValue(order)
-                .retrieve()
-                .bodyToMono(ShoppingCart.class)
-                .block();
+//        final ShoppingCart checkout = webClientBuilder.build().post()
+//                .uri("http://coupon-calculation-serv/calculator/checkout")
+//                .bodyValue(order)
+//                .retrieve()
+//                .bodyToMono(ShoppingCart.class)
+//                .block();
+        // 20230619 改造为 openFeign 调用
+        final ShoppingCart checkout = calculationService.checkout(order);
 
         if (coupon != null) {
             // 如果优惠券没有被结算掉，而用户传递了优惠券，则提示该订单不满足优惠条件，无法使用优惠券
@@ -186,7 +201,9 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                 final CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
                 // final CouponTemplateInfo couponTemplateInfo = templateService.loadTemplateInfo(couponInfo.getTemplateId());
                 // 改造 webflux 调用
-                final CouponTemplateInfo couponTemplateInfo = loadTemplateInfo(couponInfo.getTemplateId());
+//                final CouponTemplateInfo couponTemplateInfo = loadTemplateInfo(couponInfo.getTemplateId());
+                // 20230619 改造为 openFeign 调用
+                final CouponTemplateInfo couponTemplateInfo = templateService.getTemplate(couponInfo.getTemplateId());
                 couponInfo.setTemplate(couponTemplateInfo);
                 couponInfos.add(couponInfo);
             }
@@ -196,13 +213,15 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         // 调用接口试算微服务
         // return calculationService.simulateOrder(order);
         // 改造 webflux 调用
-        return webClientBuilder.build()
-                .post()
-                .uri("http://coupon-calculation-serv/calculator/simulate")
-                .bodyValue(order)
-                .retrieve()
-                .bodyToMono(SimulationResponse.class)
-                .block();
+//        return webClientBuilder.build()
+//                .post()
+//                .uri("http://coupon-calculation-serv/calculator/simulate")
+//                .bodyValue(order)
+//                .retrieve()
+//                .bodyToMono(SimulationResponse.class)
+//                .block();
+        // 20230619 改造为 openFeign 调用
+        return calculationService.simulate(order);
     }
 
     /**
@@ -254,13 +273,15 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
         // final Map<Long, CouponTemplateInfo> templateInfoMap = templateService.getTemplateInfoMap(templateIds);
         // 改造为 webflux 调用
-        final Map<Long, CouponTemplateInfo> templateInfoMap = webClientBuilder.build()
-                .get()
-                .uri("http://coupon-template-serv/template/getBatch?ids=" + templateIds)
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<Long, CouponTemplateInfo>>() {
-                })
-                .block();
+//        final Map<Long, CouponTemplateInfo> templateInfoMap = webClientBuilder.build()
+//                .get()
+//                .uri("http://coupon-template-serv/template/getBatch?ids=" + templateIds)
+//                .retrieve()
+//                .bodyToMono(new ParameterizedTypeReference<Map<Long, CouponTemplateInfo>>() {
+//                })
+//                .block();
+        // 20230619 改造为 openFeign 调用
+        final Map<Long, CouponTemplateInfo> templateInfoMap = templateService.getTemplateInBatch(templateIds);
 
         coupons.forEach(e -> e.setTemplateInfo(templateInfoMap.get(e.getTemplateId())));
 
@@ -269,11 +290,11 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                 .collect(Collectors.toList());
     }
 
-    private CouponTemplateInfo loadTemplateInfo(Long templateId) {
-        return webClientBuilder.build().get()
-                .uri("http://coupon-template-serv/template/getTemplate?id=" + templateId)
-                .retrieve()
-                .bodyToMono(CouponTemplateInfo.class)
-                .block();
-    }
+//    private CouponTemplateInfo loadTemplateInfo(Long templateId) {
+//        return webClientBuilder.build().get()
+//                .uri("http://coupon-template-serv/template/getTemplate?id=" + templateId)
+//                .retrieve()
+//                .bodyToMono(CouponTemplateInfo.class)
+//                .block();
+//    }
 }
