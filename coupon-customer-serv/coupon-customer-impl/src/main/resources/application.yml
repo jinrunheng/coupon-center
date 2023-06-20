@@ -74,3 +74,13 @@ logging:
     com.dobby.coupon: debug
     com.dobby.coupon.customer.feign.TemplateService: debug
     com.dobby.coupon.customer.feign.CalculationService: debug
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 1000
+        readTimeout: 2000
+      coupon-template-serv:
+        connectTimeout: 1000
+        readTimeout: 1500
