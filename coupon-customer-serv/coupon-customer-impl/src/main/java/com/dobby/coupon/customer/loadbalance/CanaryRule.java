@@ -88,7 +88,7 @@ public class CanaryRule implements ReactorServiceInstanceLoadBalancer {
 
         // 如果没有找到打标标记，或者标记为空，则使用RoundRobin规则进行轮训
         if (StringUtils.isBlank(trafficVersion)) {
-            // 过滤掉所有金丝雀测试的节点（Metadaba有值的节点）
+            // 过滤掉所有金丝雀测试的节点（ Metadata 有值的节点）
             List<ServiceInstance> noneCanaryInstances = instances.stream()
                     .filter(e -> !e.getMetadata().containsKey(Constant.TRAFFIC_VERSION))
                     .collect(Collectors.toList());
