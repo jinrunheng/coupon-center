@@ -1,5 +1,6 @@
 package com.dobby.coupon.customer.controller;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.dobby.coupon.calculation.api.beans.ShoppingCart;
 import com.dobby.coupon.calculation.api.beans.SimulationOrder;
 import com.dobby.coupon.calculation.api.beans.SimulationResponse;
@@ -10,6 +11,8 @@ import com.dooby.coupon.customer.api.beans.RequestCoupon;
 import com.dooby.coupon.customer.api.beans.SearchCoupon;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,7 +26,14 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("coupon-customer")
+@RefreshScope
 public class CouponCustomerController {
+
+    /**
+     * disableCouponRequest 属性为开启动态配置推送的开关，其控制着是否发放优惠券，如果值为 true 则暂停领券；我们给定了初始默认值为 false
+     */
+    @Value("${disableCouponRequest:false}")
+    private Boolean disableCoupon;
 
     @Autowired
     private CouponCustomerService customerService;
@@ -36,6 +46,11 @@ public class CouponCustomerController {
      */
     @PostMapping("requestCoupon")
     public Coupon requestCoupon(@Valid @RequestBody RequestCoupon request) {
+        // 如果 disableCoupon 的值为 true，则暂停领券
+        if (disableCoupon) {
+            log.info("暂停领取优惠券");
+            return null;
+        }
         return customerService.requestCoupon(request);
     }
 
