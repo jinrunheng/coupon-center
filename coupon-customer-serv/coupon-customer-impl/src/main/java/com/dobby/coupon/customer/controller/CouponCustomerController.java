@@ -1,5 +1,6 @@
 package com.dobby.coupon.customer.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.dobby.coupon.calculation.api.beans.ShoppingCart;
 import com.dobby.coupon.calculation.api.beans.SimulationOrder;
@@ -9,6 +10,7 @@ import com.dobby.coupon.customer.service.CouponCustomerService;
 import com.dobby.coupon.template.api.beans.CouponInfo;
 import com.dooby.coupon.customer.api.beans.RequestCoupon;
 import com.dooby.coupon.customer.api.beans.SearchCoupon;
+import com.dooby.coupon.customer.api.enums.CouponStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +47,7 @@ public class CouponCustomerController {
      * @return
      */
     @PostMapping("requestCoupon")
+    @SentinelResource(value = "requestCoupon", fallback = "getNothing")
     public Coupon requestCoupon(@Valid @RequestBody RequestCoupon request) {
         // 如果 disableCoupon 的值为 true，则暂停领券
         if (disableCoupon) {
@@ -52,6 +55,18 @@ public class CouponCustomerController {
             return null;
         }
         return customerService.requestCoupon(request);
+    }
+
+    /**
+     * 领券降级方法
+     *
+     * @param request
+     * @return
+     */
+    public Coupon getNothing(RequestCoupon request) {
+        return Coupon.builder()
+                .status(CouponStatus.INACTIVE)
+                .build();
     }
 
     /**
@@ -96,6 +111,7 @@ public class CouponCustomerController {
      * @return
      */
     @PostMapping("findCoupon")
+    @SentinelResource(value = "customer-findCoupon")
     public List<CouponInfo> findCoupon(@Valid @RequestBody SearchCoupon request) {
         return customerService.findCoupon(request);
     }
