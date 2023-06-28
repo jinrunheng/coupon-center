@@ -84,6 +84,7 @@ public class CouponTemplateController {
 //        if (ids.size() == 2) {
 //            throw new RuntimeException("异常");
 //        }
+
         // 可以测试慢调用熔断
 //            try {
 //                Thread.sleep(500 * ids.size());
