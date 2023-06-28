@@ -77,12 +77,17 @@ server:
         probability: 1.0
         # 每秒采样数字最高为100
         rate: 1000
-
-logging:
-  level:
-    com.dobby.coupon: debug
-    com.dobby.coupon.customer.feign.TemplateService: debug
-    com.dobby.coupon.customer.feign.CalculationService: debug
+    zipkin:
+      sender:
+        type: rabbit
+      rabbitmq:
+        addresses: 127.0.0.1:5672
+        queue: zipkin
+#logging:
+#  level:
+#    com.dobby.coupon: debug
+#    com.dobby.coupon.customer.feign.TemplateService: debug
+#    com.dobby.coupon.customer.feign.CalculationService: debug
 
 feign:
   client:

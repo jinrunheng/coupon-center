@@ -81,6 +81,13 @@ spring:
         probability: 1
         # 每秒采样数字最高为100
         rate: 1000
-logging:
-  level:
-    com.dobby.coupon: debug
+    zipkin:
+      sender:
+        type: rabbit
+      #    base-url: http://localhost:9411/
+      rabbitmq:
+        addresses: 127.0.0.1:5672
+        queue: zipkin
+#logging:
+#  level:
+#    com.dobby.coupon: debug
