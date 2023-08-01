@@ -17,11 +17,13 @@
     </properties>
 
     <dependencies>
+        <!--spring-cloud-gateway 是实现了网关功能模块的基础组件-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
         <!-- I版中移除了Ribbon，gateway玩不转了，需要手动加入loadbalancer注解 -->
+        <!--Nacos 与 Loadbalancer 起到了网关层的导航作用，让 Gateway 在请求转发的过程中可以通过"服务发现 + 负载均衡" 定位到对应的服务节点-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
@@ -35,7 +37,7 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
+        <!--Redis + Lua 做网关层限流-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
